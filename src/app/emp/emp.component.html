@@ -27,7 +27,35 @@
             No tasks for this user Currently
         </div>
     </ng-template>
-    
+    <div class="d-flex justify-content-center my-2 pr-2">
+        <button class="btn btn-primary mr-1" *ngFor="let x of allProcessInstances; index as i" (click)="ActivityInstance(x.id)" >
+            Instance {{i+1}}
+        </button>
+   </div>
+    <table class="table " >
+        <thead>
+            <tr>
+                 <th>User</th>
+                 <th>Task Name</th>
+                 <th>Start</th>
+                 <th>End</th>
+                 <th>variable Name</th>
+                 <th>value</th>
+            </tr>
+            <tr *ngFor="let x of ActivityInstanceData; index as i">
+                <td>{{x.assignee}}</td>
+                <td>{{x.activityName}}</td>
+                <td>{{x.startTime}}</td>
+                <td *ngIf="x.endTime , else elsePart">{{x.endTime}}</td>
+                <ng-template #elsePart>
+                    <td > Pending</td>
+                </ng-template>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+    </table>
+
     
     </section>
     
