@@ -26,4 +26,13 @@ export class MappformService {
   submitForm(data , taskId):Observable<any>{
     return this._HttpClient.post(`${this.cmaundaUrl}/task/${taskId}/submit-form`,data);
   }
+  getAllProcessInstances():Observable<any>{
+    return this._HttpClient.get(`${this.cmaundaUrl}/process-instance`);
+  }
+  getActivityInstance(processInstanceId):Observable<any>{
+    return this._HttpClient.get(`${this.cmaundaUrl}/history/activity-instance?processInstanceId=${processInstanceId}`);
+  }
+  getActivityInstanceHistory(activityInstanceId):Observable<any>{
+  return this._HttpClient.get(`${this.cmaundaUrl}/history/detail?activityInstanceId=${activityInstanceId}`);    
+  }
 }
