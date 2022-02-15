@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-    <div id="" class="row mt-2" >
+    <div id="" class="row mt-2 pl-3 pr-3" >
             <div *ngIf="userTasks, else elsePart"   class="col-md-3 mt-5 border border-primary rounded my-2 p-3">
                 <h3 class="text-primary border text-center rounded-pill  ">Task List</h3>
                 <button class="btn btn-primary mt-2" *ngFor="let x of userTasks ; index as i" (click)="getForm(x.id)">
@@ -20,15 +20,66 @@
             <form action="" id="mmmm">
         
             </form>
+            
         </div>
     </div>
     <ng-template #elsePart >
-        <div class="alert alert-danger mt-2">
+        <div class="alert alert-danger mt-2 pl-3">
             No tasks for this user Currently
         </div>
     </ng-template>
     
-    
+    <div class="d-flex justify-content-center my-2 pr-2">
+        <button class="btn btn-primary mr-1" *ngFor="let x of allProcessInstances; index as i" (click)="ActivityInstance(x.id)" >
+            Instance {{i+1}}
+        </button>
+   </div>
+    <table class="table table-bordered table-hover table-sm table-responsive table-responsive-sm" >
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Task Name</th>
+                <th>Start</th>
+                <th>End</th>
+                <th >variable Name</th>
+                <th>value</th>
+                <th >variable Name</th>
+                <th>value</th>
+                <th >variable Name</th>
+                <th>value</th> 
+                <th>variable Name</th>
+                <th>value</th> 
+                <th >variable Name</th>
+                <th>value</th> 
+                <th >variable Name</th>
+                <th>value</th>         
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let x of ActivityInstanceData; index as i" >
+                <td *ngIf="x.assignee , else elsePartI">{{x.assignee}}</td>
+                <ng-template #elsePartI>
+                    <td>System</td>
+                </ng-template>
+                <td>{{x.activityName}}</td>
+                <td>{{x.startTime}}</td>
+                <td *ngIf="x.endTime , else elsePart">{{x.endTime}}</td>
+                <ng-template #elsePart>
+                    <td > Pending</td>
+                </ng-template>
+                <ng-container *ngFor="let j of activityInstanceHistory">
+                    <ng-container *ngIf="x.id === j.activityInstanceId" >
+                        <td class="bg-info text-light"> {{j.variableName}}</td>
+                        <td > {{j.value}}</td>   
+                    </ng-container>       
+                </ng-container>
+            </tr>
+        </tbody>    
+    </table>
+    <div *ngFor="let x of activityInstanceHistory ">
+        <h1> {{x.activityInstanceId}} </h1>
+        <h1>{{x.value}}</h1>
+    </div>
     </section>
     
     
