@@ -11,7 +11,7 @@ export class MappformService {
   //processDefinitionId='Process_1meec99:1:be649d13-8a59-11ec-a71f-0242ac110002'
   definitionKey='Process_1meec99';
   constructor( private _HttpClient :HttpClient) { }
-  getForm(taskId):Observable<any>{
+  getForm(taskId):Observable<any>{ 
     return this._HttpClient.get(`${this.cmaundaUrl}/task/${taskId}/deployed-form`);
   }
   getUserTasks(userName):Observable<any>{
@@ -24,7 +24,12 @@ export class MappformService {
     return this._HttpClient.post(`${this.cmaundaUrl}/process-definition/${processDefinitionId}/start`,data)
   }
   submitForm(data , taskId):Observable<any>{
+
     return this._HttpClient.post(`${this.cmaundaUrl}/task/${taskId}/submit-form`,data);
+  }
+  compeleteTast(data , taskId):Observable<any>{
+
+    return this._HttpClient.post(`${this.cmaundaUrl}/task/${taskId}/complete`,data);
   }
   getAllProcessInstances():Observable<any>{
     return this._HttpClient.get(`${this.cmaundaUrl}/process-instance`);
